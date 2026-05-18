@@ -86,3 +86,8 @@ ShopEase/
 │   └── products/
 │
 └── README.md
+
+Authors:
+Hitarth Gujral(2510992826)
+Kartik Ajay Paritosh(2510992841)
+Kamal Garg(2510993624)
