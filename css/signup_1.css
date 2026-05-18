@@ -1,0 +1,102 @@
+.form-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 0;
+}
+
+.form-area {
+  width: 100%;
+}
+
+.form-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.left-side,
+.right-side {
+  padding: 1.6rem;
+}
+
+.left-side {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(237, 255, 249, 0.94)),
+    radial-gradient(circle at bottom right, rgba(30, 168, 150, 0.18), transparent 34%);
+}
+
+.form-logo {
+  margin-bottom: 2.2rem;
+}
+
+.left-side h1 {
+  margin: 0;
+  font-family: "Georgia", "Cambria", serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  max-width: 12ch;
+}
+
+.form-sub {
+  margin: 1rem 0 0;
+  color: var(--text-soft);
+  line-height: 1.8;
+  max-width: 56ch;
+}
+
+.point-box {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.point-box div {
+  padding: 1rem 1.1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.point-box strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.point-box span,
+.form-head p {
+  color: var(--text-soft);
+}
+
+.right-side {
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+}
+
+.form-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.8rem;
+}
+
+.form-head p {
+  margin: 0;
+}
+
+#signupForm {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .form-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .left-side,
+  .right-side {
+    padding: 1.2rem;
+  }
+}

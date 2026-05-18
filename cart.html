@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review and manage the products added to your ShopEase shopping cart.">
+  <title>ShopEase | Your Cart</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/global_1.css">
+  <link rel="stylesheet" href="css/cart_1.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/cart.js" defer></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="top">
+    <div class="container top-row">
+      <a class="logo" href="index.html" aria-label="ShopEase home page">
+        <img src="assets/logo.svg" alt="ShopEase logo">
+        <span>ShopEase</span>
+      </a>
+
+      <button class="menu-btn" type="button">
+        Menu
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a class="active" href="cart.html">Cart</a>
+      </nav>
+
+      <div class="top-links">
+        <a class="cart-box" href="cart.html">
+          Cart
+          <span class="count">0</span>
+        </a>
+        <div class="user-area"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <section class="cart-top">
+      <div class="container cart-top-row">
+        <div>
+          <p class="small-head">Shopping cart</p>
+          <h1>Review your selected items before placing your order.</h1>
+        </div>
+        <a class="btn btn-secondary" href="shop.html">Continue shopping</a>
+      </div>
+    </section>
+
+    <section class="cart-area">
+      <div class="container cart-wrap">
+        <div class="card cart-left box">
+          <div class="title-row compact">
+            <div>
+              <h2 class="title small">Cart items</h2>
+              <p class="sub">Adjust quantities or remove products as needed.</p>
+            </div>
+            <button class="btn btn-ghost" type="button" id="clearCartButton">Clear cart</button>
+          </div>
+
+          <div id="cartContent"></div>
+        </div>
+
+        <aside class="cart-right box">
+          <p class="small-head">Order summary</p>
+          <div class="total-box">
+            <div class="total-row">
+              <span>Subtotal</span>
+              <strong id="subtotalValue">Rs. 0</strong>
+            </div>
+            <div class="total-row">
+              <span>Shipping</span>
+              <strong id="shippingValue">Rs. 0</strong>
+            </div>
+            <div class="total-row">
+              <span>Estimated tax</span>
+              <strong id="taxValue">Rs. 0</strong>
+            </div>
+            <div class="total-row total">
+              <span>Total</span>
+              <strong id="totalValue">Rs. 0</strong>
+            </div>
+          </div>
+
+          <p class="note" id="shippingNote">Free shipping unlocks on qualifying orders.</p>
+          <button class="btn btn-primary full-width" type="button" id="checkoutButton">Place order</button>
+          <p class="note" id="orderStatusMessage">Place your order to see the confirmation message.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot-row">
+      <div>
+        <p class="foot-name">ShopEase</p>
+        <p class="foot-text">A front-end e-commerce demo built with HTML, CSS, and JavaScript.</p>
+      </div>
+      <p class="foot-text">&copy; <span class="current-year"></span> ShopEase. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="successMsg">Order placed.</div>
+</body>
+</html>

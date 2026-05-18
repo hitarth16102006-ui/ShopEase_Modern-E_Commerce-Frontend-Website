@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View product details, specifications, and related items on ShopEase.">
+  <title>ShopEase | Product Details</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/global_1.css">
+  <link rel="stylesheet" href="css/product_1.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/product.js" defer></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="top">
+    <div class="container top-row">
+      <a class="logo" href="index.html" aria-label="ShopEase home page">
+        <img src="assets/logo.svg" alt="ShopEase logo">
+        <span>ShopEase</span>
+      </a>
+
+      <button class="menu-btn" type="button">
+        Menu
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a class="active" href="shop.html">Shop</a>
+        <a href="cart.html">Cart</a>
+      </nav>
+
+      <div class="top-links">
+        <a class="cart-box" href="cart.html">
+          Cart
+          <span class="count">0</span>
+        </a>
+        <div class="user-area"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="item-page">
+    <section class="item-area">
+      <div class="container">
+        <div id="productDetailRoot"></div>
+      </div>
+    </section>
+
+    <section class="more-area">
+      <div class="container">
+        <div class="title-row">
+          <div>
+            <p class="small-head">You may also like</p>
+            <h2 class="title">Related recommendations</h2>
+          </div>
+          <a class="text-link" href="shop.html">See full catalog</a>
+        </div>
+        <div class="item-list small-list" id="relatedProducts"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot-row">
+      <div>
+        <p class="foot-name">ShopEase</p>
+        <p class="foot-text">A front-end e-commerce demo built with HTML, CSS, and JavaScript.</p>
+      </div>
+      <p class="foot-text">&copy; <span class="current-year"></span> ShopEase. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

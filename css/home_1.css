@@ -1,0 +1,273 @@
+main {
+  padding-bottom: 2rem;
+}
+
+.home-top {
+  padding: 2.2rem 0 1.8rem;
+}
+
+.home-top-wrap {
+  display: grid;
+  justify-content: center;
+}
+
+.home-box,
+.offer-card,
+.filter-box,
+.bottom-left,
+.bottom-right {
+  padding: 1.6rem;
+}
+
+.home-box {
+  width: 1175px;
+  margin: 0 auto;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding: 2.3rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 240, 0.96)),
+    radial-gradient(circle at top, rgba(244, 185, 66, 0.12), transparent 32%);
+}
+
+.home-box h1 {
+  margin: 0;
+  font-family: "Georgia", "Cambria", serif;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 0.98;
+  max-width: 11.5ch;
+}
+
+.home-text {
+  margin: 1.2rem 0 0;
+  max-width: 62ch;
+  color: var(--text-soft);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.9rem;
+}
+
+.home-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+  width: 100%;
+  margin-top: 2.3rem;
+}
+
+.home-points .card {
+  padding: 1.15rem 1rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(23, 48, 66, 0.08);
+}
+
+.home-points strong {
+  display: block;
+  font-size: 1.75rem;
+}
+
+.home-points span {
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.offer-area {
+  padding: 0.5rem 0 1.4rem;
+}
+
+.offer-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.offer-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.offer-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.offer-card p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.offer-num {
+  width: 2.9rem;
+  height: 2.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(255, 107, 74, 0.12);
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.shop-area {
+  padding: 1rem 0 1.5rem;
+}
+
+.filter-box {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.filter-line {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.cat-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 0.75rem;
+}
+
+.cat-btn {
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 48, 66, 0.12);
+  background: #ffffff;
+  color: var(--text-soft);
+  font-weight: 700;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cat-btn:hover,
+.cat-btn.active {
+  background: var(--text);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.result-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  color: var(--text-soft);
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.empty-box {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-box h3 {
+  margin: 0 0 0.5rem;
+}
+
+.empty-box p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.bottom-info {
+  padding: 0.5rem 0 2rem;
+}
+
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1rem;
+}
+
+.bottom-left h2,
+.bottom-right h3 {
+  margin: 0 0 0.85rem;
+}
+
+.list-points {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+.pill {
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(20, 51, 74, 0.08);
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .item-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .offer-row,
+  .home-points,
+  .item-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-line {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-box,
+  .offer-card,
+  .filter-box,
+  .bottom-left,
+  .bottom-right {
+    padding: 1.2rem;
+  }
+
+  .home-box {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .home-points,
+  .offer-row,
+  .item-list {
+    grid-template-columns: 1fr;
+  }
+
+  .result-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

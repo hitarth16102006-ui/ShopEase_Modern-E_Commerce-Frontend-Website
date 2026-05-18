@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create a ShopEase account to explore the frontend e-commerce experience.">
+  <title>ShopEase | Signup</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/global_1.css">
+  <link rel="stylesheet" href="css/signup_1.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/signup.js" defer></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="form-page">
+    <section class="form-area">
+      <div class="container form-wrap">
+        <div class="card left-side box">
+          <a class="logo form-logo" href="index.html" aria-label="Return to ShopEase home page">
+            <img src="assets/logo.svg" alt="ShopEase logo">
+            <span>ShopEase</span>
+          </a>
+
+          <p class="small-head">Join ShopEase</p>
+          <h1>Create your account and start exploring ShopEase.</h1>
+          
+
+          <div class="point-box">
+            <div>
+              
+              <p>Register with your name, email, and a secure demo password.</p>
+            </div>
+           
+          </div>
+        </div>
+
+        <div class="card right-side box">
+          <div class="form-head">
+            <h2>Signup</h2>
+            <p>Fill in the form to test signup validation and redirect behavior.</p>
+          </div>
+
+          <form id="signupForm" novalidate>
+            <label class="field" for="signupName">
+              <span>Full name</span>
+              <input id="signupName" name="name" type="text" autocomplete="off" required placeholder="Enter your full name">
+            </label>
+
+            <label class="field" for="signupEmail">
+              <span>Email address</span>
+              <input id="signupEmail" name="email" type="email" autocomplete="off" required placeholder="student@example.com">
+            </label>
+
+            <label class="field" for="signupPassword">
+              <span>Password</span>
+              <input id="signupPassword" name="password" type="password" autocomplete="off" required placeholder="At least 8 characters">
+            </label>
+
+            <label class="field" for="signupConfirmPassword">
+              <span>Confirm password</span>
+              <input id="signupConfirmPassword" name="confirmPassword" type="password" autocomplete="off" required placeholder="Re-enter password">
+            </label>
+
+            <label class="check-box" for="acceptTerms">
+              <input id="acceptTerms" name="acceptTerms" type="checkbox" required>
+              <span>I understand this is a frontend demo form used for validation practice only.</span>
+            </label>
+
+            <button class="btn btn-primary full-width" type="submit">Create account</button>
+            <p class="form-message" id="signupMessage"></p>
+          </form>
+
+          <p class="help">
+            Already registered?
+            <a class="text-link" href="login.html">Login here</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
