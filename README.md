@@ -47,7 +47,7 @@ Modern landing page with featured products, offers, and product catalog.
 |------------|---------|
 | HTML5 | Structure |
 | CSS3 | Styling & Responsive Design |
-| JavaScript (Vanilla JS) | Dynamic Functionality |
+| JavaScript | Dynamic Functionality |
 | DOM Manipulation | Dynamic UI Rendering |
 | Responsive CSS Grid/Flexbox | Layout System |
 
