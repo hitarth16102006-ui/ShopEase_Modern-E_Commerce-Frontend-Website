@@ -10,11 +10,17 @@
     var message = document.getElementById("loginMessage");
     var emailInput = document.getElementById("loginEmail");
     var passwordInput = document.getElementById("loginPassword");
+    var currentUser = app.getCurrentUser();
+
+    if (currentUser) {
+      emailInput.value = currentUser.email;
+    }
 
    
     form.addEventListener("submit", function (event) {
       var email = emailInput.value.trim();
       var password = passwordInput.value;
+      var savedUser = null;
 
       event.preventDefault();
 
@@ -33,9 +39,26 @@
         return;
       }
 
+      savedUser = app.findUserByEmail(email);
+
+      if (!savedUser) {
+        setFormMessage(message, "No account found with this email. Please sign up first.", "error");
+        return;
+      }
+
+      if (savedUser.password !== password) {
+        setFormMessage(message, "Incorrect password. Please try again.", "error");
+        return;
+      }
+
+      if (!app.setCurrentUser(savedUser)) {
+        setFormMessage(message, "Could not save login on this browser.", "error");
+        return;
+      }
+
       console.log("clicked!");
-      setFormMessage(message, "Demo login successful. Redirecting...", "success");
-      app.showToast("Login form submitted.");
+      setFormMessage(message, "Login successful. Redirecting...", "success");
+      app.showToast("Login successful.");
       form.reset();
 
       window.setTimeout(function () {

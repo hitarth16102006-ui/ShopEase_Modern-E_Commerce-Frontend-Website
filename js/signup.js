@@ -20,6 +20,8 @@
       var email = emailInput.value.trim();
       var password = passwordInput.value;
       var confirmPassword = confirmPasswordInput.value;
+      var users = [];
+      var oldUser = null;
 
       event.preventDefault();
 
@@ -48,9 +50,28 @@
         return;
       }
 
+      oldUser = app.findUserByEmail(email);
+
+      if (oldUser) {
+        setFormMessage(message, "An account with this email already exists. Please login instead.", "error");
+        return;
+      }
+
+      users = app.getSavedUsers();
+      users.push({
+        name: name,
+        email: email,
+        password: password
+      });
+
+      if (!app.saveUsers(users)) {
+        setFormMessage(message, "Could not save your account in local storage.", "error");
+        return;
+      }
+
       console.log("clicked!");
-      setFormMessage(message, "Account details validated. Redirecting to login...", "success");
-      app.showToast("Signup form submitted.");
+      setFormMessage(message, "Account created and saved. Redirecting to login...", "success");
+      app.showToast("Signup successful.");
       form.reset();
 
       window.setTimeout(function () {

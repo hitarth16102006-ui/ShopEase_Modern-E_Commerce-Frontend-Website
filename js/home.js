@@ -207,6 +207,10 @@
       updateView();
     });
 
+    if (app.refreshHomeUserText) {
+      app.refreshHomeUserText();
+    }
+
     updateView();
   }
 

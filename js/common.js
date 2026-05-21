@@ -3,7 +3,8 @@
   window.ShopEase = app;
 
   app.state = {
-    cart: []
+    cart: [],
+    currentUser: null
   };
 
   function formatIndianNumber(value) {
@@ -101,6 +102,217 @@
     }
 
     return normalizedItems;
+  }
+
+  function getStorageItem(keyName) {
+    try {
+      return window.localStorage.getItem(keyName);
+    } catch (error) {
+      console.warn("Could not read local storage.");
+      return "";
+    }
+  }
+
+  function setStorageItem(keyName, value) {
+    try {
+      window.localStorage.setItem(keyName, value);
+      return true;
+    } catch (error) {
+      console.warn("Could not save local storage.");
+      return false;
+    }
+  }
+
+  function removeStorageItem(keyName) {
+    try {
+      window.localStorage.removeItem(keyName);
+    } catch (error) {
+      console.warn("Could not clear local storage.");
+    }
+  }
+
+  function normalizeEmail(emailText) {
+    return String(emailText || "").trim().toLowerCase();
+  }
+
+  function normalizeUsers(userList) {
+    var cleanUsers = [];
+    var index = 0;
+    var item = null;
+    var name = "";
+    var email = "";
+    var password = "";
+
+    if (!userList || typeof userList.length === "undefined") {
+      return cleanUsers;
+    }
+
+    for (index = 0; index < userList.length; index += 1) {
+      item = userList[index];
+
+      if (!item) {
+        continue;
+      }
+
+      name = String(item.name || "").trim();
+      email = normalizeEmail(item.email);
+      password = String(item.password || "");
+
+      if (name !== "" && email !== "" && password !== "") {
+        cleanUsers.push({
+          name: name,
+          email: email,
+          password: password
+        });
+      }
+    }
+
+    return cleanUsers;
+  }
+
+  function getSavedUsers() {
+    var rawUsers = getStorageItem("shopEaseUsers");
+    var parsedUsers = [];
+
+    if (!rawUsers) {
+      return [];
+    }
+
+    try {
+      parsedUsers = JSON.parse(rawUsers);
+    } catch (error) {
+      console.warn("Could not read user list.");
+      parsedUsers = [];
+    }
+
+    return normalizeUsers(parsedUsers);
+  }
+
+  function saveUsers(userList) {
+    var cleanUsers = normalizeUsers(userList);
+    return setStorageItem("shopEaseUsers", JSON.stringify(cleanUsers));
+  }
+
+  function findUserByEmail(emailText) {
+    var users = getSavedUsers();
+    var email = normalizeEmail(emailText);
+    var index = 0;
+
+    for (index = 0; index < users.length; index += 1) {
+      if (users[index].email === email) {
+        return users[index];
+      }
+    }
+
+    return null;
+  }
+
+  function getCurrentUser() {
+    var rawUser = getStorageItem("shopEaseCurrentUser");
+    var parsedUser = null;
+    var email = "";
+    var matchedUser = null;
+
+    if (!rawUser) {
+      return null;
+    }
+
+    try {
+      parsedUser = JSON.parse(rawUser);
+    } catch (error) {
+      console.warn("Could not read current user.");
+      return null;
+    }
+
+    email = normalizeEmail(parsedUser.email);
+
+    if (email === "") {
+      return null;
+    }
+
+    matchedUser = findUserByEmail(email);
+
+    if (matchedUser) {
+      return {
+        name: matchedUser.name,
+        email: matchedUser.email
+      };
+    }
+
+    return {
+      name: String(parsedUser.name || "User").trim() || "User",
+      email: email
+    };
+  }
+
+  function setCurrentUser(userData) {
+    var matchedUser = null;
+    var nextUser = null;
+
+    if (!userData) {
+      return false;
+    }
+
+    matchedUser = findUserByEmail(userData.email);
+
+    if (matchedUser) {
+      nextUser = {
+        name: matchedUser.name,
+        email: matchedUser.email
+      };
+    } else if (normalizeEmail(userData.email) !== "") {
+      nextUser = {
+        name: String(userData.name || "User").trim() || "User",
+        email: normalizeEmail(userData.email)
+      };
+    }
+
+    if (!nextUser) {
+      return false;
+    }
+
+    if (!setStorageItem("shopEaseCurrentUser", JSON.stringify(nextUser))) {
+      return false;
+    }
+
+    app.state.currentUser = nextUser;
+    renderAuthSlots();
+    return true;
+  }
+
+  function clearCurrentUser() {
+    app.state.currentUser = null;
+    removeStorageItem("shopEaseCurrentUser");
+    renderAuthSlots();
+  }
+
+  function getShortName(fullName) {
+    var text = String(fullName || "").trim();
+    var firstSpace = text.indexOf(" ");
+
+    if (text === "") {
+      return "User";
+    }
+
+    if (firstSpace === -1) {
+      return text;
+    }
+
+    return text.substring(0, firstSpace);
+  }
+
+  function updateHomeUserText() {
+    var signupLink = document.getElementById("homeSignupLink");
+
+    if (!signupLink) {
+      return;
+    }
+
+    if (app.state.currentUser) {
+      signupLink.style.display = "none";
+    } else {
+      signupLink.style.display = "";
+    }
   }
 
   function readCartFromQuery() {
@@ -471,10 +683,33 @@
     var slot = null;
     var loginLink = null;
     var signupLink = null;
+    var currentUser = app.state.currentUser;
+    var userText = null;
+    var logoutButton = null;
+
+    if (!currentUser) {
+      currentUser = getCurrentUser();
+      app.state.currentUser = currentUser;
+    }
 
     for (index = 0; index < slots.length; index += 1) {
       slot = slots[index];
       slot.innerHTML = "";
+
+      if (currentUser) {
+        userText = document.createElement("span");
+        userText.className = "user-name";
+        userText.textContent = "Hi, " + currentUser.name;
+
+        logoutButton = document.createElement("button");
+        logoutButton.type = "button";
+        logoutButton.className = "btn btn-secondary btn-small logout-btn";
+        logoutButton.textContent = "Logout";
+
+        slot.appendChild(userText);
+        slot.appendChild(logoutButton);
+        continue;
+      }
 
       loginLink = document.createElement("a");
       loginLink.className = "text-link";
@@ -489,6 +724,9 @@
       slot.appendChild(loginLink);
       slot.appendChild(signupLink);
     }
+
+    updateHomeUserText();
+    setLinkTargets();
   }
 
   function showToast(message) {
@@ -531,6 +769,13 @@
         return;
       }
 
+      if (hasClassWord(target, "logout-btn")) {
+        console.log("clicked!");
+        clearCurrentUser();
+        showToast("Logged out.");
+        return;
+      }
+
       if (hasClassWord(target, "menu-btn")) {
         nav = document.getElementById("nav");
         console.log("clicked!");
@@ -552,6 +797,7 @@
 
   function initLayout() {
     app.state.cart = readCartFromQuery();
+    app.state.currentUser = getCurrentUser();
     setCurrentYear();
     renderAuthSlots();
     syncCartCount();
@@ -566,6 +812,13 @@
     return buildPageUrl("product.html", productId);
   };
   app.getProductById = getProductById;
+  app.getSavedUsers = getSavedUsers;
+  app.saveUsers = saveUsers;
+  app.findUserByEmail = findUserByEmail;
+  app.getCurrentUser = getCurrentUser;
+  app.setCurrentUser = setCurrentUser;
+  app.clearCurrentUser = clearCurrentUser;
+  app.refreshHomeUserText = updateHomeUserText;
   app.getCart = getCart;
   app.setCart = setCart;
   app.addToCart = addToCart;
